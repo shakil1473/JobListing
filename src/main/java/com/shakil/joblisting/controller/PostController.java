@@ -4,9 +4,7 @@ import com.shakil.joblisting.model.Post;
 import com.shakil.joblisting.services.PostServices;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,5 +27,15 @@ public class PostController {
     @GetMapping
     public List<Post> getPost() {
         return m_PostServices.findAll();
+    }
+
+    @RequestMapping("/job/search/{text}")
+    public List<Post> searchPost(@PathVariable String text) {
+        return m_PostServices.findAll();
+    }
+
+    @PostMapping("/job/post")
+    public Post addPost(@RequestBody Post post) {
+        return m_PostServices.save(post);
     }
 }
